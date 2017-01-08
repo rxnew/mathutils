@@ -101,7 +101,7 @@ auto Vector<dim, Real>::norm(int n) const -> long double {
   return std::pow(static_cast<long double>(inner), 1.0l / n);
 }
 
-template <int dim, class Real = float>
+template <int dim, class Real>
 auto Vector<dim, Real>::reduce_dimension() const -> Vector<dim - 1, Real> {
   auto p = std::array<Real, dim - 1>();
   for(auto i = 0; i < dim - 1; ++i) {

@@ -3,10 +3,10 @@
 #include "vector.hpp"
 
 namespace mathutils {
-template <int dim, class Real = float, class T = Vector<dim, Real>>
+template <int dim, class Real = float, class VectorType = Vector<dim, Real>>
 class Polyhedron {
  public:
-  using Vector = T;
+  using Vector = VectorType;
 
   Polyhedron() = default;
   Polyhedron(Vector const& size, Vector const& position);
