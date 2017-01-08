@@ -28,10 +28,12 @@ public:
   auto operator[](size_t n) const -> Real const&;
 
   auto dimension() const -> int;
-  template <std::enable_if_t<std::is_floating_point<Real>::value,
+  template <class T = Real,
+            std::enable_if_t<std::is_floating_point<T>::value,
                              std::nullptr_t> = nullptr>
   auto norm(int n = 2) const -> Real;
-  template <std::enable_if_t<!std::is_floating_point<Real>::value,
+  template <class T = Real,
+            std::enable_if_t<!std::is_floating_point<T>::value,
                              std::nullptr_t> = nullptr>
   auto norm(int n = 2) const -> long double;
   auto reduce_dimension() const -> Vector<dim - 1, Real>;

@@ -3,6 +3,7 @@
 #include <cmath>
 
 namespace mathutils {
+template <int dim, class Real>
 template <class T, class... Args, class>
 inline Vector<dim, Real>::Vector(T&& t, Args&&... args)
   : p_{{std::forward<T>(t), std::forward<Args>(args)...}} {
@@ -81,7 +82,8 @@ inline auto Vector<dim, Real>::dimension() const -> int {
 }
 
 template <int dim, class Real>
-template <std::enable_if_t<std::is_floating_point<Real>::value, std::nullptr_t>
+template <class T,
+          std::enable_if_t<std::is_floating_point<T>::value, std::nullptr_t>>
 auto Vector<dim, Real>::norm(int n) const -> Real {
   auto inner = Real(0);
   for(auto const& e : p_) {
@@ -91,7 +93,8 @@ auto Vector<dim, Real>::norm(int n) const -> Real {
 }
 
 template <int dim, class Real>
-template <std::enable_if_t<!std::is_floating_point<Real>::value, std::nullptr_t>
+template <class T,
+          std::enable_if_t<!std::is_floating_point<T>::value, std::nullptr_t>>
 auto Vector<dim, Real>::norm(int n) const -> long double {
   auto inner = 0;
   for(auto const& e : p_) {
