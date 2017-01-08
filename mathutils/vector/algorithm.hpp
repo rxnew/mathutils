@@ -22,4 +22,4 @@ auto is_intersected(Vector<2, Real> const& a1,
                     Vector<2, Real> const& b2) -> bool;
 }
 
-#include "vector/vector_impl.hpp"
+#include "algorithm/algorithm_impl.hpp"
