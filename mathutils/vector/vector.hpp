@@ -48,14 +48,9 @@ class Vector {
   auto crbegin() const noexcept -> const_reverse_iterator;
   auto crend() const noexcept -> const_reverse_iterator;
   auto dimension() const -> int;
-  template <class T = Real,
-            std::enable_if_t<std::is_floating_point<T>::value,
-                             std::nullptr_t> = nullptr>
-  auto norm(int n = 2) const -> Real;
-  template <class T = Real,
-            std::enable_if_t<!std::is_floating_point<T>::value,
-                             std::nullptr_t> = nullptr>
-  auto norm(int n = 2) const -> long double;
+  template <class T =
+            std::conditional_t<std::is_integral<Real>::value, float, Real>>
+  auto norm(int n = 2) const -> T;
   auto reduce_dimension() const -> Vector<dim - 1, Real>;
 
  protected:
@@ -65,8 +60,8 @@ class Vector {
   Array p_;
 };
 
-using Vector1d = Vector<1>;
-using Vector2d = Vector<2>;
+using Vector1 = Vector<1>;
+using Vector2 = Vector<2>;
 
 template <int dim, class Real>
 auto operator<<(std::ostream& os, Vector<dim, Real> const& vector)

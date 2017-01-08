@@ -147,25 +147,13 @@ inline auto Vector<dim, Real>::dimension() const -> int {
 }
 
 template <int dim, class Real>
-template <class T,
-          std::enable_if_t<std::is_floating_point<T>::value, std::nullptr_t>>
-auto Vector<dim, Real>::norm(int n) const -> Real {
-  auto inner = Real(0);
+template <class T>
+auto Vector<dim, Real>::norm(int n) const -> T {
+  auto inner = T(0);
   for(auto const& e : p_) {
-    inner += std::pow(e, n);
+    inner += static_cast<T>(std::pow(e, n));
   }
-  return std::pow(inner, Real(1) / n);
-}
-
-template <int dim, class Real>
-template <class T,
-          std::enable_if_t<!std::is_floating_point<T>::value, std::nullptr_t>>
-auto Vector<dim, Real>::norm(int n) const -> long double {
-  auto inner = 0;
-  for(auto const& e : p_) {
-    inner += std::pow(e, n);
-  }
-  return std::pow(static_cast<long double>(inner), 1.0l / n);
+  return std::pow(inner, T(1) / n);
 }
 
 template <int dim, class Real>
