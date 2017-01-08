@@ -3,7 +3,8 @@
 #include "vector.hpp"
 
 namespace mathutils {
-template <int dim, class Real = float, template <class...>, VectorT = Vector>
+template <int dim, class Real = float,
+          template <int, class> class VectorT = Vector>
 class Polyhedron {
  public:
   using Vector = VectorT<dim, Real>;
@@ -11,9 +12,8 @@ class Polyhedron {
   Polyhedron() = default;
   Polyhedron(Vector const& size, Vector const& position);
   Polyhedron(Vector&& size, Vector&& position);
-  template <class T, class... Args,
-            class = std::enable_if_t<!std::is_convertible<T, Polyhedron>::value>>
-  explicit Polyhedron(T&& t, Args&&... args);
+  template <class... Args>
+  explicit Polyhedron(Real arg, Args&&... args);
   Polyhedron(Polyhedron const&) = default;
   Polyhedron(Polyhedron&&) noexcept = default;
   virtual ~Polyhedron() noexcept = default;
@@ -27,7 +27,7 @@ class Polyhedron {
   auto get_position() const -> Vector const&;
   auto set_size(Vector const& size) -> void;
   auto set_position(Vector const& position) -> void;
-  auto make_antigoglin_position() const -> Vector const&;
+  auto make_antigoglin_position() const -> Vector;
   auto reduce_dimension() const -> Polyhedron<dim - 1, Real, VectorT>;
   auto is_intersected(Vector const& position) const -> bool;
   auto is_intersected(Polyhedron const& other) const -> bool;
@@ -37,15 +37,15 @@ class Polyhedron {
   Vector position_;
 
  private:
-  template <class T, class... Args>
-  auto _set_args(int i, T&& t, Args&&... args) -> void;
+  template <class... Args>
+  auto _set_args(int i, Real arg, Args&&... args) -> void;
   auto _set_args(int i) -> void;
 };
 }
 
 namespace std {
 template <>
-template <int dim, class Real, class VectorT>
+template <int dim, class Real, template <int, class> class VectorT>
 struct hash<mathutils::Polyhedron<dim, Real, VectorT>> {
   auto operator()(mathutils::Polyhedron<dim, Real, VectorT> const& obj)
     const noexcept -> size_t;

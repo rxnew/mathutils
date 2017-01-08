@@ -105,11 +105,11 @@ auto Vector<dim, Real>::norm(int n) const -> long double {
 
 template <int dim, class Real>
 auto Vector<dim, Real>::reduce_dimension() const -> Vector<dim - 1, Real> {
-  auto p = std::array<Real, dim - 1>();
+  auto vector = Vector<dim - 1, Real>();
   for(auto i = 0; i < dim - 1; ++i) {
-    p[i] = (*this)[i];
+    vector[i] = (*this)[i];
   }
-  return Vector<dim - 1, Real>(std::move(p));
+  return vector;
 }
 
 template <int dim, class Real>
