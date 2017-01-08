@@ -7,7 +7,7 @@ namespace mathutils {
 template <int dim, class Real = float>
 class Vector {
 public:
-  Vector() = default;
+  Vector();
   template <class T, class... Args,
             class = std::enable_if_t<!std::is_convertible<T, Vector>::value>>
   explicit Vector(T&& t, Args&&... args);

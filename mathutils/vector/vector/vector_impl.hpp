@@ -4,6 +4,17 @@
 
 namespace mathutils {
 template <int dim, class Real>
+Vector<dim, Real>::Vector() {
+  for(auto i = 0; i < dim; ++i) {
+    p_[i] = Real(0);
+  }
+}
+
+template <int dim>
+Vector<dim, int>::Vector() : p_{0} {
+}
+
+template <int dim, class Real>
 template <class T, class... Args, class>
 inline Vector<dim, Real>::Vector(T&& t, Args&&... args)
   : p_{{std::forward<T>(t), std::forward<Args>(args)...}} {
