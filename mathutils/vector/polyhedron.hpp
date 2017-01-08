@@ -3,10 +3,10 @@
 #include "vector.hpp"
 
 namespace mathutils {
-template <int dim, class Real = float, class VectorType = Vector<dim, Real>>
+template <int dim, class Real = float, template <class...>, VectorT = Vector>
 class Polyhedron {
  public:
-  using Vector = VectorType;
+  using Vector = VectorT<dim, Real>;
 
   Polyhedron() = default;
   Polyhedron(Vector const& size, Vector const& position);
@@ -28,7 +28,7 @@ class Polyhedron {
   auto set_size(Vector const& size) -> void;
   auto set_position(Vector const& position) -> void;
   auto make_antigoglin_position() const -> Vector const&;
-  auto reduce_dimension() const -> Polyhedron<dim - 1, Real, Vector>;
+  auto reduce_dimension() const -> Polyhedron<dim - 1, Real, VectorT>;
   auto is_intersected(Vector const& position) const -> bool;
   auto is_intersected(Polyhedron const& other) const -> bool;
 
@@ -45,9 +45,9 @@ class Polyhedron {
 
 namespace std {
 template <>
-template <int dim, class Real, class Vector>
-struct hash<mathutils::Polyhedron<dim, Real, Vector>> {
-  auto operator()(mathutils::Polyhedron<dim, Real, Vector> const& obj)
+template <int dim, class Real, class VectorT>
+struct hash<mathutils::Polyhedron<dim, Real, VectorT>> {
+  auto operator()(mathutils::Polyhedron<dim, Real, VectorT> const& obj)
     const noexcept -> size_t;
 };
 }
