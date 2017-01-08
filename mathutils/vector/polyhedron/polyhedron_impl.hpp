@@ -78,11 +78,11 @@ is_intersected(Vector const& position) const -> bool {
 template <int dim, class Real, template <int, class> class VectorT>
 auto Polyhedron<dim, Real, VectorT>::
 is_intersected(Polyhedron const& other) const -> bool {
-  auto const antigoglin_position = other.make_antigoglin_position();
   for(auto i = 0; i < dim; ++i) {
-    if(position_[i] >= antigoglin_position[i]) return false;
+    if(position_[i] >= other.position_[i] + other.size_[i] ||
+       position_[i] + size_[i] <= other.position_[i]) return false;
   }
-  return other.is_intersected(*this);
+  return true;
 }
 
 template <int dim, class Real, template <int, class> class VectorT>
