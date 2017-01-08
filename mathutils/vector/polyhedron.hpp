@@ -43,13 +43,5 @@ class Polyhedron {
 };
 }
 
-namespace std {
-template <>
-template <int dim, class Real, template <int, class> class VectorT>
-struct hash<mathutils::Polyhedron<dim, Real, VectorT>> {
-  auto operator()(mathutils::Polyhedron<dim, Real, VectorT> const& obj)
-    const noexcept -> size_t;
-};
-}
-
 #include "polyhedron/polyhedron_impl.hpp"
+#include "polyhedron/hash.hpp"

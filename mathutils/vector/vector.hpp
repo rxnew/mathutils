@@ -53,13 +53,5 @@ auto operator<<(std::ostream& os, Vector<dim, Real> const& vector)
   -> std::ostream&;
 }
 
-namespace std {
-template <>
-template <int dim, class Real>
-struct hash<mathutils::Vector<dim, Real>> {
-  auto operator()(mathutils::Vector<dim, Real> const& obj) const noexcept
-    -> size_t;
-};
-}
-
 #include "vector/vector_impl.hpp"
+#include "vector/hash.hpp"
