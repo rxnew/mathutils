@@ -101,6 +101,15 @@ auto Vector<dim, Real>::norm(int n) const -> long double {
   return std::pow(static_cast<long double>(inner), 1.0l / n);
 }
 
+template <int dim, class Real = float>
+auto Vector<dim, Real>::reduce_dimension() const -> Vector<dim - 1, Real> {
+  auto p = std::array<Real, dim - 1>();
+  for(auto i = 0; i < dim - 1; ++i) {
+    p[i] = (*this)[i];
+  }
+  return Vector<dim - 1, Real>(std::move(p));
+}
+
 template <int dim, class Real>
 inline Vector<dim, Real>::Vector(std::array<Real, dim> const& p) : p_(p) {
 }
@@ -118,5 +127,18 @@ auto operator<<(std::ostream& os, Vector<dim, Real> const& vector)
     os << vector[i];
   }
   return os << ")";
+}
+}
+
+namespace std {
+template <>
+template <int dim, class Real>
+auto hash<mathutils::Vector<dim, Real>>::
+operator()(mathutils::Vector<dim, Real> const& obj) const noexcept -> size_t {
+  auto hash_value = size_t(0);
+  for(auto i = 0; i < dim; ++i) {
+    hash_value ^= hash<Real>((*this)[i]);
+  }
+  return hash_value;
 }
 }
