@@ -28,7 +28,7 @@ class Polyhedron {
   auto set_size(Vector const& size) -> void;
   auto set_position(Vector const& position) -> void;
   auto make_antigoglin_position() const -> Vector const&;
-  auto reduce_dimension() const -> Polyhedron<dim - 1, Real>;
+  auto reduce_dimension() const -> Polyhedron<dim - 1, Real, Vector>;
   auto is_intersected(Vector const& position) const -> bool;
   auto is_intersected(Polyhedron const& other) const -> bool;
 
