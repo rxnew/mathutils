@@ -94,6 +94,34 @@ TEST_F(Vector3iTest, Times) {
   EXPECT_EQ(vector3i, Vector3i(2, 4, 6));
 }
 
+TEST_F(Vector3iTest, Iterator) {
+  auto i = 0;
+  for(auto it = std::begin(vector3i_); it != std::end(vector3i_); ++it) {
+    EXPECT_EQ(*it, vector3i_[i++]);
+  }
+}
+
+TEST_F(Vector3iTest, ConstIterator) {
+  auto i = 0;
+  for(auto it = std::cbegin(vector3i_); it != std::cend(vector3i_); ++it) {
+    EXPECT_EQ(*it, vector3i_[i++]);
+  }
+}
+
+TEST_F(Vector3iTest, ReverseIterator) {
+  auto i = 2;
+  for(auto it = std::rbegin(vector3i_); it != std::rend(vector3i_); ++it) {
+    EXPECT_EQ(*it, vector3i_[i--]);
+  }
+}
+
+TEST_F(Vector3iTest, ConstReverseIterator) {
+  auto i = 2;
+  for(auto it = std::crbegin(vector3i_); it != std::crend(vector3i_); ++it) {
+    EXPECT_EQ(*it, vector3i_[i--]);
+  }
+}
+
 TEST_F(Vector3iTest, ReduceDimension) {
   auto vector2i = vector3i_.reduce_dimension();
   EXPECT_EQ(vector2i, Vector2i(1, 2));

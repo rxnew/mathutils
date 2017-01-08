@@ -6,7 +6,15 @@
 namespace mathutils {
 template <int dim, class Real = float>
 class Vector {
-public:
+ private:
+  using Array = std::array<Real, dim>;
+
+ public:
+  using iterator = typename Array::iterator;
+  using const_iterator = typename Array::const_iterator;
+  using reverse_iterator = typename Array::reverse_iterator;
+  using const_reverse_iterator = typename Array::const_reverse_iterator;
+
   Vector();
   template <class T, class... Args,
             class = std::enable_if_t<!std::is_convertible<T, Vector>::value>>
@@ -27,6 +35,18 @@ public:
   auto operator[](size_t n) -> Real&;
   auto operator[](size_t n) const -> Real const&;
 
+  auto begin() noexcept -> iterator;
+  auto begin() const noexcept -> const_iterator;
+  auto end() noexcept -> iterator;
+  auto end() const noexcept -> const_iterator;
+  auto cbegin() const noexcept -> const_iterator;
+  auto cend() const noexcept -> const_iterator;
+  auto rbegin() noexcept -> reverse_iterator;
+  auto rbegin() const noexcept -> const_reverse_iterator;
+  auto rend() noexcept -> reverse_iterator;
+  auto rend() const noexcept -> const_reverse_iterator;
+  auto crbegin() const noexcept -> const_reverse_iterator;
+  auto crend() const noexcept -> const_reverse_iterator;
   auto dimension() const -> int;
   template <class T = Real,
             std::enable_if_t<std::is_floating_point<T>::value,
@@ -39,10 +59,10 @@ public:
   auto reduce_dimension() const -> Vector<dim - 1, Real>;
 
  protected:
-  Vector(std::array<Real, dim> const& p);
-  Vector(std::array<Real, dim>&& p);
+  Vector(Array const& p);
+  Vector(Array&& p);
 
-  std::array<Real, dim> p_;
+  Array p_;
 };
 
 using Vector1d = Vector<1>;

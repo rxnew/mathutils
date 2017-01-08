@@ -82,6 +82,66 @@ auto Vector<dim, Real>::operator*(Real const& n) const -> Vector {
 }
 
 template <int dim, class Real>
+auto Vector<dim, Real>::begin() noexcept -> iterator {
+  return std::begin(p_);
+}
+
+template <int dim, class Real>
+auto Vector<dim, Real>::begin() const noexcept -> const_iterator {
+  return std::cbegin(p_);
+}
+
+template <int dim, class Real>
+auto Vector<dim, Real>::end() noexcept -> iterator {
+  return std::end(p_);
+}
+
+template <int dim, class Real>
+auto Vector<dim, Real>::end() const noexcept -> const_iterator {
+  return std::cend(p_);
+}
+
+template <int dim, class Real>
+auto Vector<dim, Real>::cbegin() const noexcept -> const_iterator {
+  return std::cbegin(p_);
+}
+
+template <int dim, class Real>
+auto Vector<dim, Real>::cend() const noexcept -> const_iterator {
+  return std::cend(p_);
+}
+
+template <int dim, class Real>
+auto Vector<dim, Real>::rbegin() noexcept -> reverse_iterator {
+  return std::rbegin(p_);
+}
+
+template <int dim, class Real>
+auto Vector<dim, Real>::rbegin() const noexcept -> const_reverse_iterator {
+  return std::crbegin(p_);
+}
+
+template <int dim, class Real>
+auto Vector<dim, Real>::rend() noexcept -> reverse_iterator {
+  return std::rend(p_);
+}
+
+template <int dim, class Real>
+auto Vector<dim, Real>::rend() const noexcept -> const_reverse_iterator {
+  return std::crend(p_);
+}
+
+template <int dim, class Real>
+auto Vector<dim, Real>::crbegin() const noexcept -> const_reverse_iterator {
+  return std::crbegin(p_);
+}
+
+template <int dim, class Real>
+auto Vector<dim, Real>::crend() const noexcept -> const_reverse_iterator {
+  return std::crend(p_);
+}
+
+template <int dim, class Real>
 inline auto Vector<dim, Real>::dimension() const -> int {
   return dim;
 }
@@ -118,11 +178,11 @@ auto Vector<dim, Real>::reduce_dimension() const -> Vector<dim - 1, Real> {
 }
 
 template <int dim, class Real>
-inline Vector<dim, Real>::Vector(std::array<Real, dim> const& p) : p_(p) {
+inline Vector<dim, Real>::Vector(Array const& p) : p_(p) {
 }
 
 template <int dim, class Real>
-inline Vector<dim, Real>::Vector(std::array<Real, dim>&& p) : p_(std::move(p)) {
+inline Vector<dim, Real>::Vector(Array&& p) : p_(std::move(p)) {
 }
 
 template <int dim, class Real>
