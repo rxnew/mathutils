@@ -3,8 +3,8 @@
 namespace std {
 template <>
 template <int dim, class Real, template <int, class> class VectorT>
-struct hash<mathutils::Polyhedron<dim, Real, VectorT>> {
-  auto operator()(mathutils::Polyhedron<dim, Real, VectorT> const& obj)
+struct hash<mathutils::Hyperrectangle<dim, Real, VectorT>> {
+  auto operator()(mathutils::Hyperrectangle<dim, Real, VectorT> const& obj)
     const noexcept -> size_t;
 };
 }
