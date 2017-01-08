@@ -32,9 +32,7 @@ public:
   auto norm(int n = 2) const -> Real;
   template <class = std::enable_if_t<!std::is_floating_point<Real>::value>>
   auto norm(int n = 2) const -> long double;
-  template <int dim, class Real = float>
   auto reduce_dimension() const -> Vector<dim - 1, Real>;
-}
 
  protected:
   Vector(std::array<Real, dim> const& p);
