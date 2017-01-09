@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 add_executable(vector-test
   vector_test.cpp
   hyperrectangle_test.cpp
+  util_test.cpp
   )
 
 target_link_libraries(vector-test
