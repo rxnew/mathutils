@@ -3,15 +3,19 @@
 #include "vector.hpp"
 
 namespace mathutils {
-template <int dim, class Real = float,
+template <int dim, class RealType = float,
           template <int, class> class VectorT = Vector>
 class Hyperrectangle {
  public:
+  using Dimension = std::integral_constant<int, dim>;
+  using Real = RealType;
   using Vector = VectorT<dim, Real>;
 
   Hyperrectangle() = default;
   Hyperrectangle(Vector const& size, Vector const& position);
-  Hyperrectangle(Vector&& size, Vector&& position);
+  explicit Hyperrectangle(Vector&& size, Vector&& position);
+  explicit Hyperrectangle(Vector const& size);
+  Hyperrectangle(Vector&& size);
   template <class... Args>
   explicit Hyperrectangle(Real arg, Args&&... args);
   Hyperrectangle(Hyperrectangle const&) = default;

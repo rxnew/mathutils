@@ -4,12 +4,15 @@
 #include <sstream>
 
 namespace mathutils {
-template <int dim, class Real = float>
+template <int dim, class RealType = float>
 class Vector {
  private:
-  using Array = std::array<Real, dim>;
+  using Array = std::array<RealType, dim>;
 
  public:
+  using Dimension = std::integral_constant<int, dim>;
+  using Real = RealType;
+
   using iterator = typename Array::iterator;
   using const_iterator = typename Array::const_iterator;
   using reverse_iterator = typename Array::reverse_iterator;

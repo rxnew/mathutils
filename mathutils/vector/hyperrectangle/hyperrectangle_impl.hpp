@@ -14,6 +14,18 @@ Hyperrectangle(Vector&& size, Vector&& position)
 }
 
 template <int dim, class Real, template <int, class> class VectorT>
+Hyperrectangle<dim, Real, VectorT>::
+Hyperrectangle(Vector const& size)
+  : size_(size), position_() {
+}
+
+template <int dim, class Real, template <int, class> class VectorT>
+Hyperrectangle<dim, Real, VectorT>::
+Hyperrectangle(Vector&& size)
+  : size_(std::move(size)), position_() {
+}
+
+template <int dim, class Real, template <int, class> class VectorT>
 template <class... Args>
 Hyperrectangle<dim, Real, VectorT>::
 Hyperrectangle(Real arg, Args&&... args) {
