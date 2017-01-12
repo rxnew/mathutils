@@ -58,6 +58,42 @@ TEST_F(VectorAccessorsTest, GetZ) {
   EXPECT_EQ(get_z(vector4i_), 3);
 }
 
+TEST_F(VectorAccessorsTest, SetX) {
+  auto vector1i = vector1i_;
+  auto vector2i = vector2i_;
+  auto vector3i = vector3i_;
+  auto vector4i = vector4i_;
+  set_x(vector1i, -1);
+  set_x(vector2i, -1);
+  set_x(vector3i, -1);
+  set_x(vector4i, -1);
+  EXPECT_EQ(vector1i[0], -1);
+  EXPECT_EQ(vector2i[0], -1);
+  EXPECT_EQ(vector3i[0], -1);
+  EXPECT_EQ(vector4i[0], -1);
+}
+
+TEST_F(VectorAccessorsTest, SetY) {
+  auto vector2i = vector2i_;
+  auto vector3i = vector3i_;
+  auto vector4i = vector4i_;
+  set_y(vector2i, -1);
+  set_y(vector3i, -1);
+  set_y(vector4i, -1);
+  EXPECT_EQ(vector2i[1], -1);
+  EXPECT_EQ(vector3i[1], -1);
+  EXPECT_EQ(vector4i[1], -1);
+}
+
+TEST_F(VectorAccessorsTest, SetZ) {
+  auto vector3i = vector3i_;
+  auto vector4i = vector4i_;
+  set_z(vector3i, -1);
+  set_z(vector4i, -1);
+  EXPECT_EQ(vector3i[2], -1);
+  EXPECT_EQ(vector4i[2], -1);
+}
+
 TEST_F(HyperrectangleAccessorsTest, GetX) {
   EXPECT_EQ(get_x(hyperrectangle1i_), 5);
   EXPECT_EQ(get_x(hyperrectangle2i_), 5);
@@ -92,4 +128,76 @@ TEST_F(HyperrectangleAccessorsTest, GetH) {
 TEST_F(HyperrectangleAccessorsTest, GetD) {
   EXPECT_EQ(get_d(hyperrectangle3i_), 3);
   EXPECT_EQ(get_d(hyperrectangle4i_), 3);
+}
+
+TEST_F(HyperrectangleAccessorsTest, SetX) {
+  auto hyperrectangle1i = hyperrectangle1i_;
+  auto hyperrectangle2i = hyperrectangle2i_;
+  auto hyperrectangle3i = hyperrectangle3i_;
+  auto hyperrectangle4i = hyperrectangle4i_;
+  set_x(hyperrectangle1i, -1);
+  set_x(hyperrectangle2i, -1);
+  set_x(hyperrectangle3i, -1);
+  set_x(hyperrectangle4i, -1);
+  EXPECT_EQ(hyperrectangle1i.get_position()[0], -1);
+  EXPECT_EQ(hyperrectangle2i.get_position()[0], -1);
+  EXPECT_EQ(hyperrectangle3i.get_position()[0], -1);
+  EXPECT_EQ(hyperrectangle4i.get_position()[0], -1);
+}
+
+TEST_F(HyperrectangleAccessorsTest, SetY) {
+  auto hyperrectangle2i = hyperrectangle2i_;
+  auto hyperrectangle3i = hyperrectangle3i_;
+  auto hyperrectangle4i = hyperrectangle4i_;
+  set_y(hyperrectangle2i, -1);
+  set_y(hyperrectangle3i, -1);
+  set_y(hyperrectangle4i, -1);
+  EXPECT_EQ(hyperrectangle2i.get_position()[1], -1);
+  EXPECT_EQ(hyperrectangle3i.get_position()[1], -1);
+  EXPECT_EQ(hyperrectangle4i.get_position()[1], -1);
+}
+
+TEST_F(HyperrectangleAccessorsTest, SetZ) {
+  auto hyperrectangle3i = hyperrectangle3i_;
+  auto hyperrectangle4i = hyperrectangle4i_;
+  set_z(hyperrectangle3i, -1);
+  set_z(hyperrectangle4i, -1);
+  EXPECT_EQ(hyperrectangle3i.get_position()[2], -1);
+  EXPECT_EQ(hyperrectangle4i.get_position()[2], -1);
+}
+
+TEST_F(HyperrectangleAccessorsTest, SetW) {
+  auto hyperrectangle1i = hyperrectangle1i_;
+  auto hyperrectangle2i = hyperrectangle2i_;
+  auto hyperrectangle3i = hyperrectangle3i_;
+  auto hyperrectangle4i = hyperrectangle4i_;
+  set_w(hyperrectangle1i, -1);
+  set_w(hyperrectangle2i, -1);
+  set_w(hyperrectangle3i, -1);
+  set_w(hyperrectangle4i, -1);
+  EXPECT_EQ(hyperrectangle1i.get_size()[0], -1);
+  EXPECT_EQ(hyperrectangle2i.get_size()[0], -1);
+  EXPECT_EQ(hyperrectangle3i.get_size()[0], -1);
+  EXPECT_EQ(hyperrectangle4i.get_size()[0], -1);
+}
+
+TEST_F(HyperrectangleAccessorsTest, SetH) {
+  auto hyperrectangle2i = hyperrectangle2i_;
+  auto hyperrectangle3i = hyperrectangle3i_;
+  auto hyperrectangle4i = hyperrectangle4i_;
+  set_h(hyperrectangle2i, -1);
+  set_h(hyperrectangle3i, -1);
+  set_h(hyperrectangle4i, -1);
+  EXPECT_EQ(hyperrectangle2i.get_size()[1], -1);
+  EXPECT_EQ(hyperrectangle3i.get_size()[1], -1);
+  EXPECT_EQ(hyperrectangle4i.get_size()[1], -1);
+}
+
+TEST_F(HyperrectangleAccessorsTest, SetD) {
+  auto hyperrectangle3i = hyperrectangle3i_;
+  auto hyperrectangle4i = hyperrectangle4i_;
+  set_d(hyperrectangle3i, -1);
+  set_d(hyperrectangle4i, -1);
+  EXPECT_EQ(hyperrectangle3i.get_size()[2], -1);
+  EXPECT_EQ(hyperrectangle4i.get_size()[2], -1);
 }
