@@ -52,6 +52,19 @@ auto is_intersected(Vector<2, Real> const& a1,
     _ccw(b1, b2, a1) * _ccw(b1, b2, a2) <= 0;
 }
 
+template <int dim, class Real, template <class...> class U>
+auto is_intersected(U<Hyperrectangle<dim, Real>> const& hyperrectangles)
+  -> bool {
+  auto const& v = hyperrectangles;
+  for(auto it = std::cbegin(v); it != std::cend(v); ++it) {
+    for(auto jt = it; jt != std::cend(v); ++jt) {
+      if(it == jt) continue;
+      if(it->is_intersected(*jt)) return true;
+    }
+  }
+  return false;
+}
+
 template <class Real>
 auto _ccw(Vector<2, Real> const& a,
           Vector<2, Real> const& b,

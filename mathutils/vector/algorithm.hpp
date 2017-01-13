@@ -20,6 +20,9 @@ auto is_intersected(Vector<2, Real> const& a1,
                     Vector<2, Real> const& a2,
                     Vector<2, Real> const& b1,
                     Vector<2, Real> const& b2) -> bool;
+template <int dim, class Real, template <class...> class U>
+auto is_intersected(U<Hyperrectangle<dim, Real>> const& hyperrectangles)
+  -> bool;
 }
 
 #include "algorithm/algorithm_impl.hpp"
