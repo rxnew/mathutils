@@ -31,8 +31,10 @@ class Hyperrectangle {
   auto get_position() const -> Vector const&;
   auto set_size(Vector const& size) -> void;
   auto set_position(Vector const& position) -> void;
-  auto make_antigoglin_position() const -> Vector;
-  auto reduce_dimension() const -> Hyperrectangle<dim - 1, Real, VectorT>;
+  auto antigoglin_position() const -> Vector;
+  auto surface_area() const -> Real;
+  auto volume() const -> Real;
+  auto base() const -> Hyperrectangle<dim - 1, Real, VectorT>;
   auto is_intersected(Vector const& position) const -> bool;
   auto is_intersected(Hyperrectangle const& other) const -> bool;
 

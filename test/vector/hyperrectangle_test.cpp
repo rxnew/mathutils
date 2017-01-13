@@ -87,14 +87,24 @@ TEST_F(Hyperrectangle3iTest, SetPosition) {
   EXPECT_EQ(hyperrectangle3i.get_position(), Vector3i(0, 0, 0));
 }
 
-TEST_F(Hyperrectangle3iTest, MakeAntigoglinPosition) {
+TEST_F(Hyperrectangle3iTest, AntigoglinPosition) {
   auto hyperrectangle3i = hyperrectangle3i_;
-  auto position = hyperrectangle3i.make_antigoglin_position();
+  auto position = hyperrectangle3i.antigoglin_position();
   EXPECT_EQ(position, Vector3i(5, 7, 9));
 }
 
-TEST_F(Hyperrectangle3iTest, ReduceDimension) {
-  auto hyperrectangle2i = hyperrectangle3i_.reduce_dimension();
+TEST_F(Hyperrectangle3iTest, SurfaceArea) {
+  auto surface_area = hyperrectangle3i_.surface_area();
+  EXPECT_EQ(surface_area, 22);
+}
+
+TEST_F(Hyperrectangle3iTest, Volume) {
+  auto volume = hyperrectangle3i_.volume();
+  EXPECT_EQ(volume, 6);
+}
+
+TEST_F(Hyperrectangle3iTest, Base) {
+  auto hyperrectangle2i = hyperrectangle3i_.base();
   EXPECT_EQ(hyperrectangle2i.get_size(), Vector2i(1, 2));
   EXPECT_EQ(hyperrectangle2i.get_position(), Vector2i(4, 5));
 }

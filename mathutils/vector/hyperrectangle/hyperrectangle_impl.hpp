@@ -70,15 +70,35 @@ set_position(Vector const& position) -> void {
 
 template <int dim, class Real, template <int, class> class VectorT>
 auto Hyperrectangle<dim, Real, VectorT>::
-make_antigoglin_position() const -> Vector {
+antigoglin_position() const -> Vector {
   return size_ + position_;
 }
 
 template <int dim, class Real, template <int, class> class VectorT>
 auto Hyperrectangle<dim, Real, VectorT>::
-reduce_dimension() const -> Hyperrectangle<dim - 1, Real, VectorT> {
+surface_area() const -> Real {
+  auto surface_area = Real(0);
+  for(auto i = 0; i < dim; ++i) {
+    surface_area += size_[i] * size_[(i + 1) % dim];
+  }
+  return surface_area * 2;
+}
+
+template <int dim, class Real, template <int, class> class VectorT>
+auto Hyperrectangle<dim, Real, VectorT>::
+volume() const -> Real {
+  auto volume = Real(1);
+  for(auto i = 0; i < dim; ++i) {
+    volume *= size_[i];
+  }
+  return volume;
+}
+
+template <int dim, class Real, template <int, class> class VectorT>
+auto Hyperrectangle<dim, Real, VectorT>::
+base() const -> Hyperrectangle<dim - 1, Real, VectorT> {
   return Hyperrectangle<dim - 1, Real, VectorT>(size_.reduce_dimension(),
-                                            position_.reduce_dimension());
+                                                position_.reduce_dimension());
 }
 
 template <int dim, class Real, template <int, class> class VectorT>
